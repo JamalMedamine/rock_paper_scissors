@@ -6,32 +6,60 @@
     <title>Rock_paper_scissors</title>
 </head>
 <body>
+    <div id="container">
+        <div id="buttons">
+            <button id="rock">Rock</button>
+            <button id="paper">Paper</button>
+            <button id="scissors">Scissors</button>
+        </div>
+        <div id="info">
+            <div id="result">
+            </div>
+            <div id="score">
+            </div>
+            <div id="winner"></div>
+        </div>
+    </div>
     <script>
-        let humanScore=0,computerScore=0;
+        let humanScore = 0 ,
+            computerScore = 0 ;
+        let rock = document.querySelector("#rock");
+        let paper = document.querySelector("#paper");
+        let scissors = document.querySelector("#scissors"); 
+        let result = document.getElementById("result");
+        let score = document.getElementById("score");
+        let winner = document.getElementById("winner");   
         function playRound(humanChoice,computerChoice){
             if(humanChoice === computerChoice){
-                console.log(`draw ,${computerChoice} and ${humanChoice} are the same`);
+                result.textContent =`draw ,${computerChoice} and ${humanChoice} are the same`;
             }else{
                 if(computerChoice=== "paper" && humanChoice === "rock"){
-                    console.log(`you lose, ${computerChoice} beat ${humanChoice}`);
+                    result.textContent =`you lost, ${computerChoice} beat ${humanChoice}`
                     computerScore++;
                 }else if(computerChoice === "rock" && humanChoice=== "paper"){
-                    console.log(`you won, ${humanChoice} beat ${computerChoice}`);
+                    result.textContent =`you won, ${humanChoice} beat ${computerChoice}`;
                     humanScore++;
                 }else if(computerChoice==="scissors" && humanChoice==="paper"){
-                    console.log(`you lose, ${computerChoice} beat ${humanChoice}`);
+                    result.textContent = `you lose, ${computerChoice} beat ${humanChoice}`;
                     computerScore++;
                 }else if(computerChoice==="paper" && humanChoice==="scissors"){
-                    console.log(`you won, ${humanChoice} beat ${computerChoice}`);
+                    result.textContent =`you won, ${humanChoice} beat ${computerChoice}`;
                     humanScore++;
                 }else if( computerChoice==="rock" && humanChoice==="scissors"){
-                    console.log(`you lose, ${computerChoice} beat ${humanChoice}`);
+                    result.textContent = `you lose, ${computerChoice} beat ${humanChoice}`;
                     computerScore++;
                 }else{
-                    console.log(`you won, ${humanChoice} beat ${computerChoice}`);
+                    result.textContent =`you won, ${humanChoice} beat ${computerChoice}`;
                     humanScore++;
                 }
+                
             }
+            score.textContent = `your score: ${humanScore} computer score:${computerScore}`;
+                if(humanScore === 5){
+                     winner.textContent = "congrats ! the winner is you"
+                } else if(computerScore === 5){
+                     winner.textContent = "the winner is computer"
+                }
 
         }
         function getComputerChoice(){
@@ -49,17 +77,11 @@
             let humanChoice = prompt("rock , paper or scissors ?");
             return humanChoice;
         }
-        console.log(playRound(getHumanChoice().toLowerCase(),getComputerChoice()));
-        console.log(`your score :${humanScore} / computer score: ${computerScore}`);
-        console.log(playRound(getHumanChoice().toLowerCase(),getComputerChoice()));
-        console.log(`your score :${humanScore} / computer score: ${computerScore}`);
-        console.log(playRound(getHumanChoice().toLowerCase(),getComputerChoice()));
-        console.log(`your score :${humanScore} / computer score: ${computerScore}`);
-        console.log(playRound(getHumanChoice().toLowerCase(),getComputerChoice()));
-        console.log(`your score :${humanScore} / computer score: ${computerScore}`);
-        console.log(playRound(getHumanChoice().toLowerCase(),getComputerChoice()));
-        console.log(`your score :${humanScore} / computer score: ${computerScore}`);
-
+        
+        rock.addEventListener('click',() =>playRound("rock",getComputerChoice()));
+        paper.addEventListener('click',() =>playRound("paper",getComputerChoice()));
+        scissors.addEventListener('click',() => playRound("scissors",getComputerChoice()));
+        
     </script>
     
 </body>
